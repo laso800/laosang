@@ -1,64 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Page Demo</title>
+    <title>陈奕儒的个人主页</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f0f8ff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
         }
         .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 900px;
+            margin: 0 auto;
         }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+        .header-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
         }
-        img {
-            max-width: 200px;
+        .header-card::before {
+            content: '★';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 40px;
+            color: rgba(255,255,255,0.3);
+            animation: sparkle 2s infinite;
+        }
+        .header-card::after {
+            content: '✨';
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 35px;
+            animation: sparkle 2s infinite 0.5s;
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            object-fit: cover;
         }
-        .github-link {
-            background-color: #333;
+        .header-card h1 {
             color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+        }
+        .header-card .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2em;
+        }
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #f093fb, #f5576c);
+        }
+        .info-card h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .info-card h2 .icon {
+            font-size: 1.3em;
+        }
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+        .info-list li {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .info-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .info-list li .label {
+            font-weight: bold;
+            color: #667eea;
+            min-width: 100px;
+        }
+        .photo-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .photo-card h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .photo-gallery {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .photo-gallery img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+        }
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        .decoration {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .decoration-1 {
+            top: 10%;
+            left: 5%;
+            font-size: 60px;
+            opacity: 0.2;
+            animation: float 6s infinite;
+        }
+        .decoration-2 {
+            top: 30%;
+            right: 8%;
+            font-size: 50px;
+            opacity: 0.15;
+            animation: float 8s infinite 1s;
+        }
+        .decoration-3 {
+            bottom: 20%;
+            left: 10%;
+            font-size: 45px;
+            opacity: 0.2;
+            animation: float 7s infinite 2s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
         }
     </style>
 </head>
 <body>
+    <div class="decoration decoration-1">🌟</div>
+    <div class="decoration decoration-2">🎓</div>
+    <div class="decoration decoration-3">📚</div>
+    
     <div class="container">
-        <h1>小猫娘简介所</h1>
-        <img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" alt="GitHub Octocat">
+        <div class="header-card">
+            <img src="./paimeng.png" alt="头像" class="avatar">
+            <h1>陈奕儒</h1>
+            <p class="subtitle">✨ 城东一小的小学生 ✨</p>
+        </div>
         
-        <h2>liuhaowei</h2>
-        <h3>个人简介</h3>
-        <p>来自山西，是一名大学生，喜欢猫，梦想是当一只猫娘。</p>
+        <div class="info-card">
+            <h2><span class="icon">👤</span> 个人资料</h2>
+            <ul class="info-list">
+                <li>
+                    <span class="label">姓名</span>
+                    <span>陈奕儒</span>
+                </li>
+                <li>
+                    <span class="label">性别</span>
+                    <span>男生 🙋‍♂️</span>
+                </li>
+                <li>
+                    <span class="label">学校</span>
+                    <span>城东一小 🏫</span>
+                </li>
+                <li>
+                    <span class="label">家庭住址</span>
+                    <span>乐清市 🏠</span>
+                </li>
+            </ul>
+        </div>
         
-        <h2>特点</h2>
-        <ul>
-            <li>爱玩CS2</li>
-            <li>爱玩瓦洛兰特</li>
-            <li>爱看猫猫视频</li>
-        </ul>
-
-        <h2>照片</h2>
-        <ol>
-            <img src="./meimei.jpg" alt="美女">
-        </ol>
-
-        <a href="https://www.mihoyo.com/" class="github-link" target="_blank">
-            访问美女照片官网
-        </a>
+        <div class="photo-card">
+            <h2>📷 我的照片</h2>
+            <div class="photo-gallery">
+                <img src="./meimei.jpg" alt="照片1">
+                <img src="./qiusheng2.png" alt="照片2">
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🌈 欢迎来到我的个人主页！🌈</p>
+            <p>Made with 💖</p>
+        </div>
     </div>
 </body>
 </html>
