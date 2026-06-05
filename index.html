@@ -188,6 +188,34 @@
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(10deg); }
         }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            animation: zoomIn 0.2s ease;
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -227,12 +255,16 @@
         <div class="photo-card">
             <h2>📷 我的照片</h2>
             <div class="photo-gallery">
-                <img src="./photo1.jpg" alt="游泳">
-                <img src="./photo2.jpg" alt="户外">
-                <img src="./photo3.jpg" alt="学校">
-                <img src="./photo4.jpg" alt="婴儿时期">
-                <img src="./photo5.jpg" alt="玩水">
+                <img src="./photo1.jpg" alt="游泳" class="gallery-img" onclick="openLightbox(this)">
+                <img src="./photo2.jpg" alt="户外" class="gallery-img" onclick="openLightbox(this)">
+                <img src="./photo3.jpg" alt="学校" class="gallery-img" onclick="openLightbox(this)">
+                <img src="./photo4.jpg" alt="婴儿时期" class="gallery-img" onclick="openLightbox(this)">
+                <img src="./photo5.jpg" alt="玩水" class="gallery-img" onclick="openLightbox(this)">
             </div>
+        </div>
+        
+        <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+            <img id="lightbox-img" src="" alt="">
         </div>
         
         <div class="footer">
@@ -240,5 +272,15 @@
             <p>Made with 💖</p>
         </div>
     </div>
+    <script>
+        function openLightbox(img) {
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox-img').alt = img.alt;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
